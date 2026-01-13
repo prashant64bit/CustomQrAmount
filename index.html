@@ -3,48 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Pay</title>
-
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<title>UPI QR</title>
 
 <link rel="stylesheet" href="style.css">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="config.js" defer></script>
+<script src="script.js" defer></script>
 </head>
 
 <body>
-  <div class="card">
-    <div class="header">
-      <div class="title" id="payeeName"></div>
-      <div class="subtitle" id="upiId"></div>
-    </div>
+  <div class="app">
+    <h1>The Black Enterprises</h1>
 
     <input
       id="amount"
       type="number"
-      inputmode="numeric"
+      placeholder="Enter amount"
+      inputmode="decimal"
       autocomplete="off"
-      spellcheck="false"
-      placeholder="₹ Enter amount"
     >
 
-    <button class="generate" id="generateBtn">Generate QR</button>
+    <button id="generateBtn">Generate QR</button>
 
-    <div class="qr-area" id="qrArea">
-      <div class="qr-box" id="qr"></div>
-      <div class="scan-text">Scan to pay with any UPI app</div>
+    <div id="qrArea">
+      <div class="qrBox">
+        <div id="qr"></div>
+      </div>
     </div>
 
-    <button class="share" id="shareBtn">Share</button>
+    <button id="shareBtn">Share</button>
   </div>
-
-  <!-- hidden share view -->
-  <div class="share-view" id="shareView">
-    <div class="share-name" id="shareName"></div>
-    <div class="share-qr" id="shareQR"></div>
-    <div class="share-text">Scan to pay with any UPI app</div>
-  </div>
-
-<script src="config.js"></script>
-<script src="script.js"></script>
 </body>
 </html>
