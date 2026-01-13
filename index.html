@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI Pay</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UPI Pay</title>
 
-<link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/html-to-image@1.11.13/dist/html-to-image.min.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
-<script src="config.js" defer></script>
-<script src="script.js" defer></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-  <div class="container" id="capture">
-    <div class="title">The Black Enterprises</div>
-    <div class="upi">theblackenterprises@idbi</div>
+  <div class="card" id="cardToCapture">
+    <div class="header">
+      <div class="title" id="payeeName"></div>
+      <div class="subtitle" id="upiId"></div>
+    </div>
 
     <input
       id="amount"
-      type="text"
-      inputmode="decimal"
-      placeholder="₹ Enter amount"
+      type="number"
+      inputmode="numeric"
       autocomplete="off"
+      spellcheck="false"
+      placeholder="₹ Enter amount"
     >
 
-    <button id="generateBtn">Generate QR</button>
+    <button class="generate" id="generateBtn">Generate QR</button>
 
-    <div id="qrArea">
-      <div class="qr-border">
-        <div id="qr"></div>
-      </div>
+    <div class="qr-area" id="qrArea">
+      <div class="qr-box" id="qr"></div>
       <div class="scan-text">Scan to pay with any UPI app</div>
     </div>
 
-    <button id="shareBtn">Share</button>
+    <button class="share" id="shareBtn">Share</button>
   </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
