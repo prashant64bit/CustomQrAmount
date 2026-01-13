@@ -5,7 +5,7 @@
 
 body{
   margin:0;
-  background:#0f1115;
+  background:#1c1f26;
   color:#e8eaed;
   display:flex;
   justify-content:center;
@@ -38,8 +38,12 @@ input{
   border-radius:14px;
   border:1px solid #2a2d34;
   background:#111318;
-  color:#fff;
+  color:#ffffff;
   outline:none;
+}
+
+input::placeholder{
+  color:#9aa0a6;
 }
 
 /* remove number arrows */
@@ -64,7 +68,7 @@ button{
 
 #generateBtn{
   background:#8ab4f8;
-  color:#0f1115;
+  color:#1c1f26;
 }
 
 #shareBtn{
