@@ -12,36 +12,37 @@
 </head>
 
 <body>
-<div class="card">
-  <div class="header">
-    <div class="title" id="payeeName"></div>
-    <div class="subtitle" id="upiId"></div>
+  <div class="card">
+    <div class="header">
+      <div class="title" id="payeeName"></div>
+      <div class="subtitle" id="upiId"></div>
+    </div>
+
+    <input
+      id="amount"
+      type="number"
+      inputmode="numeric"
+      autocomplete="off"
+      spellcheck="false"
+      placeholder="₹ Enter amount"
+    >
+
+    <button class="generate" id="generateBtn">Generate QR</button>
+
+    <div class="qr-area" id="qrArea">
+      <div class="qr-box" id="qr"></div>
+      <div class="scan-text">Scan to pay with any UPI app</div>
+    </div>
+
+    <button class="share" id="shareBtn">Share</button>
   </div>
 
-  <input
-    id="amount"
-    type="number"
-    inputmode="numeric"
-    autocomplete="off"
-    spellcheck="false"
-    placeholder="₹ Enter amount"
-  >
-
-  <button class="generate" onclick="generateQR()">Generate QR</button>
-
-  <div id="qrArea" class="qr-area">
-    <div class="qr-box" id="qr"></div>
-    <div class="scan-text">Scan to pay with any UPI app</div>
+  <!-- hidden share view -->
+  <div class="share-view" id="shareView">
+    <div class="share-name" id="shareName"></div>
+    <div class="share-qr" id="shareQR"></div>
+    <div class="share-text">Scan to pay with any UPI app</div>
   </div>
-
-  <button class="share" id="shareBtn" onclick="shareQR()">Share</button>
-</div>
-
-<div id="shareView" class="share-view">
-  <div class="share-name" id="shareName"></div>
-  <div class="share-qr" id="shareQR"></div>
-  <div class="share-text">Scan to pay with any UPI app</div>
-</div>
 
 <script src="config.js"></script>
 <script src="script.js"></script>

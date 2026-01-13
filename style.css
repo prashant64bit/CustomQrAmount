@@ -4,7 +4,6 @@
   --text:#e8eaed;
   --sub:#9aa0a6;
   --primary:#8ab4f8;
-  --radius:20px;
 }
 
 *{
@@ -26,7 +25,7 @@ body{
   width:100%;
   max-width:420px;
   background:var(--card);
-  border-radius:var(--radius);
+  border-radius:20px;
   padding:26px 22px 30px;
   box-shadow:0 12px 32px rgba(0,0,0,.4);
 }
@@ -45,14 +44,12 @@ body{
 .subtitle{
   font-size:14px;
   color:var(--sub);
-  margin-top:2px;
 }
 
 input{
   width:100%;
   background:#111318;
   color:var(--text);
-  caret-color:var(--text);
   font-size:22px;
   padding:14px 16px;
   border-radius:14px;
@@ -67,10 +64,6 @@ input:focus{
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{
   -webkit-appearance:none;
-}
-
-input[type=number]{
-  -moz-appearance:textfield;
 }
 
 button{
@@ -102,18 +95,11 @@ button{
   text-align:center;
 }
 
-/* tight white border around QR */
 .qr-box{
   display:inline-flex;
-  justify-content:center;
-  align-items:center;
   padding:12px;
   background:#ffffff;
   border-radius:14px;
-}
-
-.qr-box img{
-  display:block;
 }
 
 .scan-text{
@@ -122,30 +108,27 @@ button{
   color:var(--sub);
 }
 
-/* share layout */
+/* share-only layout */
 .share-view{
   position:fixed;
   top:-9999px;
   left:-9999px;
-  background:#ffffff;
+  background:#fff;
   padding:22px;
-  text-align:center;
   border-radius:18px;
+  text-align:center;
 }
 
 .share-name{
   font-size:18px;
   font-weight:600;
   margin-bottom:14px;
-  color:#111;
 }
 
 .share-qr{
   display:inline-flex;
-  justify-content:center;
-  align-items:center;
   padding:12px;
-  background:#ffffff;
+  background:#fff;
   border-radius:14px;
 }
 
