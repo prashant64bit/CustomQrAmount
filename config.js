@@ -1,5 +1,5 @@
-const UPI_CONFIG = {
-  payeeName: "THE BLACK ENTERPRISES",
-  upiId: "theblackenterprises@idbi",
+window.UPI = {
+  name: "THE BLACK ENTERPRISES",
+  id: "theblackenterprises@idbi",
   currency: "INR"
 };
