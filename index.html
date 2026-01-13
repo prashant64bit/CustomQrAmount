@@ -3,33 +3,35 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UPI QR</title>
+<title>UPI Pay</title>
 
 <link rel="stylesheet" href="style.css">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 <script src="config.js" defer></script>
 <script src="script.js" defer></script>
 </head>
 
 <body>
-  <div class="app">
-    <h1>The Black Enterprises</h1>
+  <div class="container" id="capture">
+    <div class="title">The Black Enterprises</div>
+    <div class="upi">theblackenterprises@idbi</div>
 
     <input
       id="amount"
-      type="number"
-      placeholder="Enter amount"
+      type="text"
       inputmode="decimal"
+      placeholder="₹ Enter amount"
       autocomplete="off"
     >
 
     <button id="generateBtn">Generate QR</button>
 
     <div id="qrArea">
-      <div class="qrBox">
+      <div class="qr-border">
         <div id="qr"></div>
       </div>
+      <div class="scan-text">Scan to pay with any UPI app</div>
     </div>
 
     <button id="shareBtn">Share</button>
