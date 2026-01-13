@@ -3,6 +3,9 @@
 A web app that generates a UPI payment QR after the user enters an amount.  
 Designed to be easy to deploy, self-host, and customize.
 
+## Live Demo
+https://customqramount.us.kg/
+
 ## Deploy
 
 - Upload `index.html`, `config.js`, `style.css` and `script.js` to any static hosting service  
