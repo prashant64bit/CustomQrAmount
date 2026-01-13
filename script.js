@@ -1,72 +1,105 @@
-const amountInput = document.getElementById("amount");
-const qrEl = document.getElementById("qr");
-const qrArea = document.getElementById("qrArea");
-const generateBtn = document.getElementById("generateBtn");
-const shareBtn = document.getElementById("shareBtn");
+document.getElementById("payeeName").textContent = UPI.name;
+document.getElementById("upiId").textContent = UPI.id;
 
-generateBtn.onclick = () => {
+document.getElementById("generateBtn").addEventListener("click", generateQR);
+document.getElementById("shareBtn").addEventListener("click", shareCard);
+
+function buildUPILink(amount) {
+  return `upi://pay?pa=${encodeURIComponent(UPI.id)}&pn=${encodeURIComponent(UPI.name)}&cu=${encodeURIComponent(UPI.currency)}&am=${encodeURIComponent(amount)}`;
+}
+
+function generateQR() {
+  const amountInput = document.getElementById("amount");
   const amount = amountInput.value.trim();
-  if (!amount) return;
 
-  qrEl.innerHTML = "";
+  if (!amount || isNaN(amount) || Number(amount) <= 0) {
+    alert("Please enter a valid amount greater than 0");
+    amountInput.focus();
+    return;
+  }
 
-  const upiLink =
-    "upi://pay?pa=" + encodeURIComponent(UPI.id) +
-    "&pn=" + encodeURIComponent(UPI.name) +
-    "&am=" + encodeURIComponent(amount) +
-    "&cu=" + UPI.currency;
+  const link = buildUPILink(amount);
+  const qrContainer = document.getElementById("qr");
+  qrContainer.innerHTML = "";
 
-  new QRCode(qrEl, {
-    text: upiLink,
+  new QRCode(qrContainer, {
+    text: link,
     width: 220,
-    height: 220
+    height: 220,
+    colorDark: "#000000",
+    colorLight: "#ffffff"
   });
 
-  qrArea.style.display = "block";
-  shareBtn.style.display = "block";
-};
+  document.getElementById("qrArea").style.display = "block";
+  document.getElementById("shareBtn").style.display = "block";
+}
 
-shareBtn.onclick = async () => {
-  const qrImg = qrEl.querySelector("img");
-  if (!qrImg) return;
+function shareCard() {
+  const card = document.getElementById("cardToCapture");
 
-  const canvas = document.createElement("canvas");
-  canvas.width = 1080;
-  canvas.height = 1350;
-  const ctx = canvas.getContext("2d");
+  if (!document.getElementById("qr").querySelector("canvas")) {
+    alert("Generate QR first!");
+    return;
+  }
 
-  ctx.fillStyle = "#0f1115";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  const toHide = [
+    document.getElementById("generateBtn"),
+    document.getElementById("upiId"),
+    document.getElementById("amount")
+  ];
 
-  ctx.fillStyle = "#ffffff";
-  ctx.font = "bold 42px system-ui";
-  ctx.textAlign = "center";
-  ctx.fillText(UPI.name, canvas.width/2, 200);
+  const originals = toHide.map(el => ({
+    el,
+    display: el ? el.style.display : ''
+  }));
 
-  const box = 520;
-  const x = (canvas.width - box)/2;
-  const y = 320;
+  toHide.forEach(el => {
+    if (el) el.style.display = "none";
+  });
 
-  ctx.beginPath();
-  ctx.roundRect(x,y,box,box,28);
-  ctx.fill();
+  setTimeout(() => {
+    htmlToImage.toPng(card, {
+      backgroundColor: "#1c1f26",
+      pixelRatio: window.devicePixelRatio || 2,
+      canvasWidth: card.offsetWidth * (window.devicePixelRatio || 2),
+      canvasHeight: card.offsetHeight * (window.devicePixelRatio || 2),
+      width: card.offsetWidth,
+      height: card.offsetHeight,
+      quality: 1.0
+    })
+    .then(dataUrl => {
+      fetch(dataUrl)
+        .then(res => res.blob())
+        .then(blob => {
+          const file = new File([blob], "upi-payment.png", { type: "image/png" });
 
-  const img = new Image();
-  img.src = qrImg.src;
+          // Restore visibility
+          originals.forEach(item => {
+            if (item.el) item.el.style.display = item.display;
+          });
 
-  img.onload = () => {
-    ctx.drawImage(img, x+20, y+20, box-40, box-40);
-
-    ctx.font = "28px system-ui";
-    ctx.fillText(
-      "Scan to pay with any UPI app",
-      canvas.width/2,
-      y + box + 80
-    );
-
-    canvas.toBlob(blob=>{
-      const file = new File([blob],"upi-qr.png",{type:"image/png"});
-      navigator.share({ files:[file] });
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            navigator.share({
+              files: [file],
+              title: `Pay ${UPI.name}`,
+              text: "Scan to pay via UPI"
+            }).catch(() => {});
+          } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "upi-payment.png";
+            a.click();
+            URL.revokeObjectURL(url);
+          }
+        });
+    })
+    .catch(err => {
+      console.error("html-to-image error:", err);
+      alert("Failed to create image");
+      originals.forEach(item => {
+        if (item.el) item.el.style.display = item.display;
+      });
     });
-  };
-};
+  }, 260);
+}
