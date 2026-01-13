@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPI Pay</title>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="card" id="capture">
+  <div class="header">
+    <div class="title" id="payeeName"></div>
+    <div class="subtitle" id="upiId"></div>
+  </div>
+
+  <input
+    id="amount"
+    type="number"
+    inputmode="numeric"
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="off"
+    spellcheck="false"
+    min="1"
+    placeholder="₹ Enter amount"
+  >
+
+  <button class="generate" onclick="generateQR()">Generate QR</button>
+
+  <div id="qrArea" class="qr-area">
+    <div class="qr-wrap" id="qr"></div>
+    <div class="scan-text">Scan to pay with any UPI app</div>
+  </div>
+
+  <button class="share" id="shareBtn" onclick="shareQR()">Share</button>
+</div>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
