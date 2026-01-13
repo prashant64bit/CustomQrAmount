@@ -1,5 +1,6 @@
 document.getElementById("payeeName").textContent = UPI_CONFIG.payeeName;
 document.getElementById("upiId").textContent = UPI_CONFIG.upiId;
+document.getElementById("shareName").textContent = UPI_CONFIG.payeeName;
 
 const base =
   "upi://pay?pa=" + encodeURIComponent(UPI_CONFIG.upiId) +
@@ -11,30 +12,22 @@ function generateQR(){
   if(!amt || amt <= 0) return;
 
   const link = base + "&am=" + encodeURIComponent(amt);
-  const box = document.getElementById("qr");
-  box.innerHTML = "";
 
-  new QRCode(box,{
-    text:link,
-    width:220,
-    height:220,
-    colorDark:"#000",
-    colorLight:"#fff"
-  });
+  document.getElementById("qr").innerHTML = "";
+  document.getElementById("shareQR").innerHTML = "";
+
+  new QRCode(document.getElementById("qr"), { text: link, width:220, height:220 });
+  new QRCode(document.getElementById("shareQR"), { text: link, width:220, height:220 });
 
   document.getElementById("qrArea").style.display = "block";
   document.getElementById("shareBtn").style.display = "block";
 }
 
 function shareQR(){
-  html2canvas(document.getElementById("capture")).then(canvas=>{
+  html2canvas(document.getElementById("shareView")).then(canvas=>{
     canvas.toBlob(blob=>{
-      const file = new File([blob],"payment-qr.png",{type:"image/png"});
-      navigator.share({
-        files:[file],
-        title:"UPI Payment",
-        text:"Scan this QR to pay"
-      });
+      const file = new File([blob],"upi-qr.png",{type:"image/png"});
+      navigator.share({ files:[file] });
     });
   });
 }

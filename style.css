@@ -13,6 +13,7 @@
 }
 
 body{
+  margin:0;
   min-height:100vh;
   background:var(--bg);
   display:flex;
@@ -66,7 +67,6 @@ input:focus{
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button{
   -webkit-appearance:none;
-  margin:0;
 }
 
 input[type=number]{
@@ -102,19 +102,55 @@ button{
   text-align:center;
 }
 
-.qr-wrap{
-  display:flex;
+/* tight white border around QR */
+.qr-box{
+  display:inline-flex;
   justify-content:center;
-  margin-bottom:14px;
+  align-items:center;
+  padding:12px;
+  background:#ffffff;
+  border-radius:14px;
 }
 
-.qr-wrap img{
-  background:#fff;
-  padding:10px;
-  border-radius:16px;
+.qr-box img{
+  display:block;
 }
 
 .scan-text{
+  margin-top:10px;
   font-size:13px;
   color:var(--sub);
+}
+
+/* share layout */
+.share-view{
+  position:fixed;
+  top:-9999px;
+  left:-9999px;
+  background:#ffffff;
+  padding:22px;
+  text-align:center;
+  border-radius:18px;
+}
+
+.share-name{
+  font-size:18px;
+  font-weight:600;
+  margin-bottom:14px;
+  color:#111;
+}
+
+.share-qr{
+  display:inline-flex;
+  justify-content:center;
+  align-items:center;
+  padding:12px;
+  background:#ffffff;
+  border-radius:14px;
+}
+
+.share-text{
+  margin-top:12px;
+  font-size:13px;
+  color:#555;
 }
