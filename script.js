@@ -32,60 +32,21 @@ function generateQR() {
 }
 
 function shareCard() {
-  const card = document.getElementById("cardToCapture");
-  if (!document.getElementById("qr").querySelector("canvas")) {
-    alert("Generate QR first!");
-    return;
-  }
   const toHide = [
     document.getElementById("generateBtn"),
     document.getElementById("upiId"),
     document.getElementById("amount")
   ];
-  const originals = toHide.map(el => ({
-    el,
-    display: el ? el.style.display : ''
-  }));
+
   toHide.forEach(el => {
     if (el) el.style.display = "none";
   });
+
+  alert("Elements hidden — take screenshot now.\nThey will reappear in 2 seconds.");
+
   setTimeout(() => {
-    htmlToImage.toPng(card, {
-      backgroundColor: "#1c1f26",
-      pixelRatio: window.devicePixelRatio || 2,
-      canvasWidth: card.offsetWidth * (window.devicePixelRatio || 2),
-      canvasHeight: card.offsetHeight * (window.devicePixelRatio || 2),
-      width: card.offsetWidth,
-      height: card.offsetHeight,
-      quality: 1.0
-    })
-    .then(dataUrl => fetch(dataUrl).then(res => res.blob()))
-    .then(blob => {
-      const file = new File([blob], "upi-payment.png", { type: "image/png" });
-      originals.forEach(item => {
-        if (item.el) item.el.style.display = item.display;
-      });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({
-          files: [file],
-          title: `Pay ${UPI.name}`,
-          text: "Scan to pay via UPI"
-        }).catch(() => {});
-      } else {
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "upi-payment.png";
-        a.click();
-        URL.revokeObjectURL(url);
-      }
-    })
-    .catch(err => {
-      console.error("Share/image error:", err);
-      alert("Failed to create/share image. Try again or take screenshot.");
-      originals.forEach(item => {
-        if (item.el) item.el.style.display = item.display;
-      });
+    toHide.forEach(el => {
+      if (el) el.style.display = "";
     });
-  }, 400);
+  }, 2000);
 }
