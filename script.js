@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("payeeName").textContent = UPI.name;
   document.getElementById("upiId").textContent = UPI.id;
   document.getElementById("generateBtn").addEventListener("click", generateQR);
-  document.getElementById("shareBtn").addEventListener("click", shareCard);
+  document.getElementById("shareBtn").addEventListener("click", goBack);
 });
 
 function buildUPILink(amount) {
@@ -28,25 +28,13 @@ function generateQR() {
     colorLight: "#ffffff"
   });
   document.getElementById("qrArea").style.display = "block";
+  document.getElementById("generateBtn").style.display = "none";
+  document.getElementById("upiId").style.display = "none";
+  document.getElementById("amount").style.display = "none";
   document.getElementById("shareBtn").style.display = "block";
+  document.getElementById("shareBtn").textContent = "Back";
 }
 
-function shareCard() {
-  const toHide = [
-    document.getElementById("generateBtn"),
-    document.getElementById("upiId"),
-    document.getElementById("amount")
-  ];
-
-  toHide.forEach(el => {
-    if (el) el.style.display = "none";
-  });
-
-  alert("Elements hidden — take screenshot now.\nThey will reappear in 2 seconds.");
-
-  setTimeout(() => {
-    toHide.forEach(el => {
-      if (el) el.style.display = "";
-    });
-  }, 2000);
+function goBack() {
+  location.reload();
 }
