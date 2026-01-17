@@ -9,18 +9,18 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="card" id="cardToCapture">
+  <div class="card">
     <div class="header">
       <div class="title" id="payeeName"></div>
       <div class="subtitle" id="upiId"></div>
     </div>
-    <input id="amount" type="number" inputmode="numeric" autocomplete="off" spellcheck="false" placeholder="₹ Enter amount">
+    <input id="amount" type="text" inputmode="decimal" pattern="[0-9]*\.?[0-9]{0,2}" placeholder="₹ Enter amount" autocomplete="off">
     <button class="generate" id="generateBtn">Generate QR</button>
     <div class="qr-area" id="qrArea">
       <div class="qr-box" id="qr"></div>
       <div class="scan-text">Scan to pay with any UPI app</div>
     </div>
-    <button class="share" id="shareBtn">Back</button>
+    <button class="share" id="backBtn">Back</button>
   </div>
 
   <script src="config.js"></script>
