@@ -1,5 +1,5 @@
 window.UPI = {
-  name: "THE BLACK ENTERPRISES",
-  id: "theblackenterprises@idbi",
+  name: "PRASHANT THAKUR",
+  id: "shortageofname@okicici",
   currency: "INR"
 };
