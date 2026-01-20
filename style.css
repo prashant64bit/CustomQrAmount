@@ -94,3 +94,15 @@ button {
   font-size: 13px;
   color: var(--sub);
 }
+#yearFooter {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #9aa0a6;
+  text-align: center;
+  opacity: 0.8;
+  user-select: none;
+}
+
