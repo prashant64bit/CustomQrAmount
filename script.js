@@ -1,37 +1,32 @@
 const defaultPayeeName = window.UPI?.name;
-const defaultUpiId     = window.UPI?.id;
+const defaultUpiId = window.UPI?.id;
 
 let payeeName = localStorage.getItem('payeeName') || defaultPayeeName;
-let upiId     = localStorage.getItem('upiId')     || defaultUpiId;
+let upiId = localStorage.getItem('upiId') || defaultUpiId;
 
 const payeeNameEl = document.getElementById('payeeName');
-const upiIdEl     = document.getElementById('upiId');
+const upiIdEl = document.getElementById('upiId');
 const amountInput = document.getElementById('amount');
-const editBtn     = document.getElementById('editBtn');
+const editBtn = document.getElementById('editBtn');
 const generateBtn = document.getElementById('generateBtn');
-const backBtn     = document.getElementById('backBtn');
-const inputArea   = document.getElementById('inputArea');
-const qrArea      = document.getElementById('qrArea');
-const qrBox       = document.getElementById('qr');
-const editModal   = document.getElementById('editModal');
-const editNameInput  = document.getElementById('editName');
+const backBtn = document.getElementById('backBtn');
+const inputArea = document.getElementById('inputArea');
+const qrArea = document.getElementById('qrArea');
+const qrBox = document.getElementById('qr');
+const editModal = document.getElementById('editModal');
+const editNameInput = document.getElementById('editName');
 const editUpiIdInput = document.getElementById('editUpiId');
-const saveEdit    = document.getElementById('saveEdit');
-const cancelEdit  = document.getElementById('cancelEdit');
+const saveEdit = document.getElementById('saveEdit');
+const cancelEdit = document.getElementById('cancelEdit');
 
 payeeNameEl.textContent = payeeName;
-upiIdEl.textContent     = upiId;
+upiIdEl.textContent = upiId;
 
 amountInput.addEventListener('input', (e) => {
   let value = e.target.value.replace(/[^0-9.]/g, '');
   const parts = value.split('.');
-  if (parts.length > 2) {
-    value = parts[0] + '.' + parts.slice(1).join('');
-  }
-  if (parts[1]) {
-    parts[1] = parts[1].substring(0, 2);
-    value = parts[0] + '.' + parts[1];
-  }
+  if (parts.length > 2) value = parts[0] + '.' + parts.slice(1).join('');
+  if (parts[1]) value = parts[0] + '.' + parts[1].substring(0, 2);
   e.target.value = value;
 });
 
@@ -47,10 +42,10 @@ cancelEdit.addEventListener('click', () => {
 
 saveEdit.addEventListener('click', () => {
   payeeName = editNameInput.value.trim() || payeeName;
-  upiId     = editUpiIdInput.value.trim() || upiId;
+  upiId = editUpiIdInput.value.trim() || upiId;
 
   payeeNameEl.textContent = payeeName;
-  upiIdEl.textContent     = upiId;
+  upiIdEl.textContent = upiId;
 
   localStorage.setItem('payeeName', payeeName);
   localStorage.setItem('upiId', upiId);
@@ -87,10 +82,8 @@ generateBtn.addEventListener('click', () => {
 
   inputArea.style.display = 'none';
   generateBtn.style.display = 'none';
-
   qrArea.style.display = 'block';
   backBtn.style.display = 'block';
-  backBtn.textContent = 'Back';
 });
 
 backBtn.addEventListener('click', () => {
@@ -100,7 +93,5 @@ backBtn.addEventListener('click', () => {
 
   inputArea.style.display = 'block';
   generateBtn.style.display = 'block';
-  editBtn.style.display = 'flex';
-
   amountInput.value = '';
 });
