@@ -17,8 +17,8 @@ https://customqramount.us.kg/
 UPI details are hard-coded inside `config.js`.
 
 Edit the following values :
-- Payee Name: THE BLACK ENTERPRISES
-- UPI ID: theblackenterprises@idbi
+- Payee Name: PRASHANT THAKUR
+- UPI ID: shortageofname@okicici
 - Currency: INR
 
 Amount is always entered by the user.
