@@ -1,3 +1,22 @@
+/**
+ * UPI QR Generator - Main Application Script
+ * @author Prashant Thakur (@prashant64bit)
+ * @url https://prashantthakur.is-a.dev
+ * @github https://github.com/prashant64bit
+ * @license MIT
+ * @desc Fast, secure, and free UPI QR code generator for instant payment QR codes with custom amounts.
+ * @lastModified 2026-03-30
+ * 
+ * Features:
+ * - Generate UPI QR codes with custom amounts
+ * - Edit payee name and UPI ID
+ * - Browser-based processing (no server required)
+ * - LocalStorage support for user preferences
+ * - Progressive Web App (PWA) support
+ * - Offline functionality with Service Worker
+ * - Full keyboard accessibility
+ */
+
 const defaultPayeeName = window.UPI?.name;
 const defaultUpiId = window.UPI?.id;
 const defaultCurrency = window.UPI?.currency || 'INR';

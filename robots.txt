@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Allow: /index.html
+Allow: /style.css
+Allow: /script.js
+Allow: /config.js
+
+Disallow: /private/
+Disallow: /*.json$
+
+Crawl-delay: 0
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+Sitemap: https://customqramount.us.kg/sitemap.xml
