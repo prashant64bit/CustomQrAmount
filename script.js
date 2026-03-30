@@ -1,5 +1,6 @@
 const defaultPayeeName = window.UPI?.name;
 const defaultUpiId = window.UPI?.id;
+const defaultCurrency = window.UPI?.currency || 'INR';
 
 let payeeName = localStorage.getItem('payeeName') || defaultPayeeName;
 let upiId = localStorage.getItem('upiId') || defaultUpiId;
@@ -28,6 +29,12 @@ amountInput.addEventListener('input', (e) => {
   if (parts.length > 2) value = parts[0] + '.' + parts.slice(1).join('');
   if (parts[1]) value = parts[0] + '.' + parts[1].substring(0, 2);
   e.target.value = value;
+});
+
+amountInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    generateBtn.click();
+  }
 });
 
 editBtn.addEventListener('click', () => {
@@ -67,7 +74,9 @@ generateBtn.addEventListener('click', () => {
   }
 
   const encodedName = encodeURIComponent(payeeName);
-  const upiString = `upi://pay?pa=${upiId}&pn=${encodedName}&am=${amount}&cu=INR`;
+  const encodedUpiId = encodeURIComponent(upiId);
+  const encodedCurrency = encodeURIComponent(defaultCurrency);
+  const upiString = `upi://pay?pa=${encodedUpiId}&pn=${encodedName}&am=${amount}&cu=${encodedCurrency}`;
 
   qrBox.innerHTML = '';
 
@@ -94,4 +103,10 @@ backBtn.addEventListener('click', () => {
   inputArea.style.display = 'block';
   generateBtn.style.display = 'block';
   amountInput.value = '';
+});
+
+editModal.addEventListener('click', (e) => {
+  if (e.target === editModal) {
+    editModal.style.display = 'none';
+  }
 });
